@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hundred Islands Tours</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f6fbf9;
+            --card: #ffffff;
+            --text: #0f172a;
+            --muted: #64748b;
+            --accent: #0d9488;
+            --accent-soft: rgba(13, 148, 136, 0.12);
+            --accent2: #c4693d;
+            --border: rgba(15, 23, 42, 0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        .reveal {
+            opacity: 0;
+            transform: translateY(18px);
+            animation: fadeUp 0.7s ease forwards;
+        }
+        @keyframes fadeUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .reveal:nth-child(2) { animation-delay: 0.1s; }
+        .reveal:nth-child(3) { animation-delay: 0.2s; }
+        .reveal:nth-child(4) { animation-delay: 0.3s; }
+        .header-inner {
+            max-width: 1024px;
+            margin: 0 auto;
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--accent);
+            text-decoration: none;
+        }
+        .logo span { color: var(--accent2); }
+        nav a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            margin-left: 24px;
+            transition: color 0.2s;
+        }
+        nav a:hover { color: var(--accent); }
+
+        /* HERO SECTION — LINK #1 DITO */
+        .hero {
+            position: relative;
+            padding: 120px 24px;
+            text-align: center;
+            color: #fff;
+            background: url('https://mnlop.com.ph/wp-content/uploads/2019/11/hundred-island-national-park-pangasinan-1.jpg') no-repeat center center/cover;
+        }
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.55);
+            z-index: 1;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .hero-subtitle {
+            font-size: 12px;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(30px, 5vw, 48px);
+            font-weight: 700;
+            line-height: 1.15;
+            margin-bottom: 18px;
+        }
+        .hero p {
+            font-size: 17px;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 32px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            background: var(--accent2);
+            color: #fff;
+            font-weight: 700;
+            font-size: 15px;
+            text-transform: uppercase;
+            border-radius: 8px;
+            text-decoration: none;
+            box-shadow: 0 6px 18px rgba(196, 105, 61, 0.35);
+            transition: transform 0.2s, background 0.2s;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            background: #d47a4a;
+        }
+
+        section { padding: 70px 24px; }
+        .section-inner { max-width: 1024px; margin: 0 auto; }
+        .section-head { text-align: center; margin-bottom: 40px; }
+        .section-tag {
+            font-size: 12px;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--accent);
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(24px, 4vw, 32px);
+            font-weight: 700;
+            margin-bottom: 14px;
+        }
+        .section-divider {
+            width: 50px;
+            height: 3px;
+            background: var(--accent);
+            border-radius: 3px;
+            margin: 0 auto;
+        }
+
+        .two-column {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            align-items: center;
+        }
+        .col { flex: 1 1 280px; }
+        .img-card {
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .img-card img {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+            display: block;
+        }
+        h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        .desc {
+            color: var(--muted);
+            margin-bottom: 10px;
+        }
+
+        .tour-card {
+            max-width: 420px;
+            margin: 0 auto;
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        /* TOUR IMAGE — LINK #3 DITO */
+        .tour-img {
+            height: 160px;
+            background: url(https://lakbaypinas.com/wp-content/uploads/2024/09/Snapinsta.app_347725727_931023048166752_778945991359565188_n_1080-1.jpg.webp) no-repeat center center/cover;
+        }
+        .tour-body { padding: 26px; }
+        .tour-price {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--accent);
+            margin: 18px 0;
+        }
+        .book-btn {
+            display: block;
+            text-align: center;
+            padding: 12px;
+            background: var(--accent-soft);
+            color: var(--accent);
+            font-weight: 700;
+            border-radius: 8px;
+            border: 1px solid var(--accent);
+            text-decoration: none;
+            transition: background 0.2s, color 0.2s;
+        }
+        .book-btn:hover {
+            background: var(--accent);
+            color: #fff;
+        }
+
+        .contact-wrap {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        .contact-info { flex: 1 1 240px; }
+        .contact-form {
+            flex: 1 1 280px;
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 24px;
+        }
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 11px 14px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 14px;
+            margin-bottom: 14px;
+            font-family: inherit;
+        }
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 13px;
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        footer {
+            background: #0f172a;
+            color: #94a3b8;
+            padding: 30px 24px;
+            text-align: center;
+        }
+        footer h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="reveal" style="background:#fff; border-bottom:1px solid var(--border); position:sticky; top:0; z-index:100;">
+    <div class="header-inner">
+        <a href="#home" class="logo">Hundred<span>Islands</span></a>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#destination">Destination</a>
+            <a href="#tour">Tour</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </div>
+</header>
+
+<!-- HERO SECTION -->
+<section id="home" class="hero reveal">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <p class="hero-subtitle">Pangasinan, Philippines</p>
+        <h1>Discover the Hundred Islands</h1>
+        <p>Explore more than 100 beautiful islands, crystal-clear waters, and unforgettable adventures.</p>
+        <a href="#destination" class="btn">Start Exploring</a>
+    </div>
+</section>
+
+<!-- DESTINATION — LINK #2 DITO sa img src -->
+<section id="destination" class="reveal">
+    <div class="section-inner">
+        <div class="section-head">
+            <p class="section-tag">Our Destination</p>
+            <h2 class="section-title">Hundred Islands National Park</h2>
+            <div class="section-divider"></div>
+        </div>
+        <div class="two-column">
+            <div class="col img-card">
+                <img src="https://wanderera.com/wp-content/uploads/2020/03/hundred-islands-768x512.jpg" alt="Hundred Islands National Park">
+            </div>
+            <div class="col">
+                <h3>About the Place</h3>
+                <p class="desc">Located in Alaminos, Pangasinan — the Hundred Islands National Park is made up of 124 islands at low tide and 123 at high tide.</p>
+                <p class="desc">Popular spots include Governor's Island, Quezon Island, and Children's Island — perfect for swimming, snorkeling, and sightseeing.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- TOUR -->
+<section id="tour" class="reveal" style="background:#fff;">
+    <div class="section-inner">
+        <div class="section-head">
+            <p class="section-tag">Tour Package</p>
+            <h2 class="section-title">Day Tour</h2>
+            <div class="section-divider"></div>
+        </div>
+        <div class="tour-card">
+            <div class="tour-img"></div>
+            <div class="tour-body">
+                <h3>Hundred Islands Day Tour</h3>
+                <p class="desc">Boat rental · Island hopping · Snorkeling · Governor's Island viewing deck</p>
+                <ul style="padding-left:18px; margin-bottom:10px;">
+                    <li>Visit up to 3–4 islands</li>
+                    <li>Boat rental included</li>
+                    <li>Snorkeling gear available</li>
+                    <li>Whole day tour (8AM – 5PM)</li>
+                </ul>
+                <p class="tour-price">₱1,899 <small style="font-weight:400; font-size:13px; color:var(--muted);">/ group boat rate</small></p>
+                <a href="#contact" class="book-btn">Book Now</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="reveal" style="background:#fff8f2;">
+    <div class="section-inner">
+        <div class="section-head">
+            <p class="section-tag" style="color:var(--accent2);">Get In Touch</p>
+            <h2 class="section-title">Book Your Trip</h2>
+            <div class="section-divider" style="background:var(--accent2);"></div>
+        </div>
+        <div class="contact-wrap">
+            <div class="contact-info">
+                <h3>Contact Info</h3>
+                <p class="desc">Alaminos, Pangasinan</p>
+                <p><strong>Phone:</strong> 0991-482-7155</p>
+                <p><strong>Email:</strong> olano8348@gmail.com</p>
+                <p><strong>Open:</strong> Daily 7AM – 5PM</p>
+            </div>
+            <form class="contact-form">
+                <label>Your Name</label>
+                <input type="text" placeholder="Your full name" required>
+                <label>Date of Visit</label>
+                <input type="date" required>
+                <label>Number of People</label>
+                <input type="number" placeholder="How many are you?" min="1" required>
+                <label>Message</label>
+                <textarea placeholder="Any special requests?" rows="3"></textarea>
+                <button type="submit" class="submit-btn">Send Booking Request</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="reveal">
+    <h4>Hundred Islands Tours</h4>
+    <p style="font-size:14px;">Alaminos, Pangasinan · Philippines</p>
+    <p style="font-size:12px; margin-top:16px; padding-top:16px; border-top:1px solid rgba(255,255,255,0.1);">
+        &copy; 2026 Hundred Islands. All rights reserved.
+    </p>
+</footer>
+
+</body>
+</html>
